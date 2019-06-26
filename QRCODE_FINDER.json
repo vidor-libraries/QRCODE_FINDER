@@ -1,0 +1,63 @@
+{
+  "sc":{
+    "name":"QRCODE_FINDER",
+    "include":"qr.h",
+    "uid":"QR_UID",
+    "rpc":"qrRpc",
+    "ver":"QR_VER",
+    "loop":"qrLoop",
+    "swpck":"QRCODE_FINDER"
+  },
+  "module":{
+    "name":"QRCODE_FINDER",
+    "version":"1.0",
+    "parameters":[
+      {"name":"pHRES", "def":"640"},
+      {"name":"pVRES", "def":"480"},
+      {"name":"pTHRESHOLD", "def":"60"}
+    ]
+  },
+  "interfaces":[
+    {
+      "name":"vid_in",
+      "mates":["pins"],
+      "visibility":"2",
+      "signals": [
+        {"name":"data", "bits":"24", "direction":"input"},
+        {"name":"dv", "bits":"1", "direction":"input"},
+        {"name":"start", "bits":"1", "direction":"input"},
+        {"name":"reset", "bits":"1", "direction":"input"},
+        {"name":"clk", "bits":"1", "direction":"input"}
+      ]
+    },
+    {
+      "name":"vid_out",
+      "mates":["pins"],
+      "visibility":"2",
+      "signals": [
+        {"name":"data", "bits":"24", "direction":"output"},
+        {"name":"dv", "bits":"1", "direction":"output"},
+        {"name":"start", "bits":"1", "direction":"output"}
+      ]
+    }
+  ],
+  "hw":[
+    {
+      "interface":"avalon_slave",
+      "name":"avalon_slave",
+      "parameters":[
+        {"signal":"address", "name":"SPAN", "value":"11"},
+        {"signal":"read_data", "name":"BIT_WIDTH", "value":"32"},
+        {"signal":"write_data", "name":"BIT_WIDTH", "value":"32"}
+      ]
+    },
+    {
+      "interface":"vid_in",
+      "name":"vid_in"
+    },
+    {
+      "interface":"vid_out",
+      "name":"vid_out"
+    }
+  ]
+}
